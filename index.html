@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Have you recovered yet?</title>
+<meta name="description" content="Thirteen questions to determine if you're disliked, loathed or hated.">
+<script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+<link rel="image_src" href="intro.jpg">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<meta name="viewport" content="width=960, user-scalable=false">
+<link rel="shortcut icon" href="http://images.icnetwork.co.uk/collections/usvsth3m/favicon.ico" />
+<script src="fastclick.js"></script>
+<script>
+
+var qid = 0;
+var questions = [];
+
+var currentQuestion;
+
+$(document).ready( function() {
+
+});
+
+window.addEventListener('load', function() {
+  FastClick.attach(document.body);
+}, false);
+
+
+function panel(p) {
+
+  $('.panel').hide();
+  $('#' + p).show();
+
+}
+
+
+
+function startGame() {
+
+  moveIn();
+  questions = [
+
+  { a: 1, q: "How old are you?", o: ['Elders and betters', 'Lazy selfish millenial', 'Feral youth'], george: ['Great!', 'Uh oh...', 'Disgusting.'] },
+  { a: 0, q: "Are you heterosexual?" },
+  { a: 1, q: "Are you, or do you look a bit like you might&nbsp;be, Muslim?" },
+  { a: 0, q: "Do you have a job?" },
+  { a: 0, q: "Do you think it was all a lot better in the old&nbsp;days?" },
+  { a: 0, q: "Are you married?" },
+  { a: 0, q: "Were both your parents born in the&nbsp;UK?" },
+  { a: 0, q: "Michael Gove?" },
+  { a: 1, q: "Have you ever voted&nbsp;Labour?" },
+  { a: 1, q: "Have you had, or are you having, pre-marital&nbsp;sex?" },
+  { a: 1, q: "Do you think wind farms look&nbsp;nice?" },
+  { a: 1, q: "Have you ever worked for the&nbsp;BBC?" },
+  { a: 0, q: "God save the Queen?" }
+
+  ];
+  $('#qtotal').text(questions.length);
+  qid = 0;
+  score = 0;
+  setThermometer();
+  loadQuestion();
+  panel('questions');
+
+}
+
+function loadQuestion() {
+
+  if(questions.length > 0) {
+    qid++;
+    currentQuestion = questions.shift();
+    $('#question-text').html(currentQuestion.q);
+    $('.answer_buttons button').each(function(index) {
+      $(this).text(currentQuestion.o[index]);
+    });
+    $('#question-text').html(currentQuestion.q);
+    $('#qid').text(qid);
+
+  } else {
+    getResults();
+  }
+
+}
+
+function setThermometer() {
+
+  if(score == 4) { getResults(); }
+  $('#grade-bar').animate({ width: (20 + score*20).toString() + '%' },1000);
+  $('.grade').removeClass('yes');
+  $('.grade:eq(' + score + ')').addClass('yes');
+
+
+}
+
+function answer(id) {
+
+  if(id != currentQuestion.a) {
+
+    score++;
+    setThermometer();
+
+  } else {
+
+
+  }
+
+  loadQuestion();
+
+}
+
+function getResults() {
+
+  $('#result').text($('.grade:eq(' + score + ')').text().toUpperCase());
+  panel('results');
+
+}
+
+
+function tweet() {
+
+  moveOut()
+  var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
+  tweet_url += encodeURIComponent("The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " by the Daily Mail! How about you?");
+  tweet_url += '&url=' + window.location.href;
+
+  window.open(tweet_url,'_blank');
+
+}
+
+function facebook() {
+
+  moveOut();
+  FB.ui({
+  method: 'feed',
+  link: window.location.href,
+  picture: 'http://toys.usvsth3m.com/are-you-hated-by-the-daily-mail/intro.jpg',
+  name: "How Much Are You Hated By The Daily Mail?",
+  description: "The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " by the Daily Mail! How about you?"
+  }, function(response){});
+
+}
+
+function moveOut() {
+
+$('#thermo').animate({left: '-90%', right: '110%'},1000);
+$('#youmayalsolike').animate({left: '10%', right: '10%'},1000);
+
+}
+
+function moveIn() {
+
+$('#youmayalsolike').animate({left: '-90%', right: '110%'},1000);
+$('#thermo').animate({left: '10%', right: '10%'},1000);
+
+}
+
+</script>
+<style>
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+  * { -webkit-font-size-adjust: none; }
+  html { height: 100%; width: 100%; background: #000 url(./green_shoots.jpg) center center no-repeat; background-size: cover; background-attachment: fixed; }
+  body { font-family: 'Roboto Condensed'; font-size: 24px; font-size: 4vw; font-size: 4vmin; height: 100%; width: 100%; overflow: hidden; }
+  .panel { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none; }
+  #intro { display: block; }
+  #thermo { position: absolute; bottom: 10%; height: 10%; left: 10%; right: 10%; background-color: #000; border: 4px solid #fff; border-radius: 1000px; text-align: center;  }
+  #youmayalsolike { position: absolute; bottom: 10%; padding: 1% 0; left: -90%; right: 110%; background-color: #000; border: 4px solid #fff; border-radius: 1000px; text-align: center; color: #fff; }
+  #youmayalsolike a { color: #ff7f00; text-decoration: none; }
+  #grades { position: absolute; display: table; table-layout: fixed; width: 100%; height: 100%; }
+  #grade-bar { display: block; width: 20%; height: 100%; position: absolute; background: #bcab01 url(bile.gif) left top; position: absolute; top: 0; left: 0; border-radius: 1000px; }
+  .grade { display: table-cell; text-align: center; vertical-align: middle; color: #666; font-weight: bold; font-size: 3vw; font-size: 3vmin; }
+  .yes { color: #fff; text-shadow: 1px 1px #000; }
+
+
+  h1 { font-weight: bold; text-align: center; top: 10%; left: 10%; right: 10%; bottom: 50%; display: block; position: absolute; }
+  h1 img { height: 100%; max-width: 100%; }
+  .buttons { position: absolute; top: 55%; bottom: 30%; left: 10%; right: 10%; }
+  button { display: block; font-family: 'Roboto Condensed'; font-weight: bold; font-size: 24px; font-size: 4vw;  height: 100%; float: left; }
+
+button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+  background-color:#ededed;
+  -webkit-border-top-left-radius:6px;
+  -moz-border-radius-topleft:6px;
+  border-top-left-radius:6px;
+  -webkit-border-top-right-radius:6px;
+  -moz-border-radius-topright:6px;
+  border-top-right-radius:6px;
+  -webkit-border-bottom-right-radius:6px;
+  -moz-border-radius-bottomright:6px;
+  border-bottom-right-radius:6px;
+  -webkit-border-bottom-left-radius:6px;
+  -moz-border-radius-bottomleft:6px;
+  border-bottom-left-radius:6px;
+  text-indent:0;
+  margin: 1%;
+  border:2px solid #dcdcdc;
+  display:inline-block;
+  color:#000000;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #ffffff;
+}
+button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+  background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+  background-color:#dfdfdf;
+}
+button:active {
+  position:relative;
+  top:1px;
+}
+
+
+  /* this is an awful hack */
+  button.one { width: 98%; }
+  button.two { width: 48%; }
+  button.three { width: 31.3%; }
+
+  #questions { color: #fff; text-shadow: 2px 2px #000; }
+  #question-number { position: absolute; text-align: center; top: 12%; width: 100%;  }
+  #question { position: absolute; left: 15%; right: 15%; top:15%; bottom: 50%; text-align: center; font-size: 48px; font-size: 8vw; font-size: 8vmin; font-weight: bold; }
+  #question p { display: table; height: 100%; width: 100%; }
+  #question p span { display: table-cell; text-align: center; vertical-align: middle; }
+
+  #result-box { position: absolute; top: 10%; bottom: 50%; width: 100%; color: #fff; text-shadow: 1px 1px #000; text-align: center; font-weight: bold; }
+  #result { display: block; background-color: #fff; background-color: rgba(255,255,255,0.8); border-radius: 1000px; width: 80%; color: #ff7f00; text-shadow: 1px 1px #000; padding: 0.5% 0; margin: 0.5% auto; font-size: 13vh; border: 5px solid #000; }
+
+  #results button { font-weight: bold; font-size: 24px; font-size: 2.5vw; line-height: 3vw; font-weight: normal; }
+
+</style>
+
+</head>
+
+<body>
+<link rel="stylesheet" href="http://usvsth3m.co.uk/wrapper/wrapper.css">
+
+<div class="panel" id="intro">
+
+  <h1><img src="osborne.png" alt="How much are you hated by the Daily Mail?"></h1>
+
+  <div class="buttons">
+    <button id="go" class="one" onClick="startGame()">Start</button>
+  </div>
+
+</div>
+
+<div class="panel" id="questions">
+
+  <div id="question-number">Question <span id="qid">1</span> of <span id="qtotal">10</span></div>
+  <div id="question">
+    <p><span id="question-text">Are you, or do you look like a bit like you might be, Muslim?</span></p>
+  </div>
+
+  <div class="buttons answer_buttons">
+    <button id="go" class="three" onClick="answer(0)">One</button>
+    <button id="go" class="three" onClick="answer(1)">Two</button>
+    <button id="go" class="three" onClick="answer(2)">Three</button>
+  </div>
+
+</div>
+
+<div class="panel" id="results">
+
+  <div id="result-box">
+    The results are in! You are
+    <span id="result">HATED</span>
+    by the Daily Mail!
+  </div>
+
+    <div class="buttons">
+      <button id="go" class="three" onClick="startGame()">Try again</button><button id="go" class="three" onClick="tweet()">Tweet your result</button><button id="go" class="three" onClick="facebook()">Share on Facebook</button>
+    </div>
+  </div>
+
+</div>
+
+<div id="thermo">
+
+  <div id="grade-bar">
+
+  </div>
+
+  <div id="grades">
+
+    <div class="grade yes">Not sure</div><div class="grade">Maybe?</div><div class="grade">Errr…</div><div class="grade">Not looking good</div><div class="grade">NOPE</div>
+
+  </div>
+
+</div>
+
+<div id="youmayalsolike">
+<p>You might also like <a href="http://toys.usvsth3m.com/iain-duncan-smiths-realistic-unemployment-simulator/">Iain Duncan Smith's Realistic Unemployment Simulator</a>.</p>
+</div>
+
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '383984258388383',                        // App ID from the app dashboard
+      channelUrl : '//toys.usvsth3m.com/channel.html', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-41079103-2']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<script type='text/javascript'>
+    var _sf_async_config={};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 33715;
+    _sf_async_config.domain = 'usvsth3m.tumblr.com';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = 'Change this to your Section name';  //CHANGE THIS
+    _sf_async_config.authors = 'Change this to your Author name';    //CHANGE THIS
+    /** CONFIGURATION END **/
+    (function(){
+      function loadChartbeat() {
+        window._sf_endpt=(new Date()).getTime();
+        var e = document.createElement('script');
+        e.setAttribute('language', 'javascript');
+        e.setAttribute('type', 'text/javascript');
+        e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+        document.body.appendChild(e);
+      }
+      var oldonload = window.onload;
+      window.onload = (typeof window.onload != 'function') ?
+      loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+</script>
+
+<!-- SiteCatalyst Code -->
+<script type="text/JavaScript"><!--
+var s_account = "tmrusvsthem,tmrgroupaggregateprod";
+var s_omnitureDNSAlias = "trinitymirror.112.2o7.net";
+//--></script>
+<script language="JavaScript" type="text/javascript" src="http://s.mirror.co.uk/resources/js/s_code.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+s.pageName ="us vs th3m:"+document.title;
+s.prop5 ="us vs th3m";
+s.prop1=document.location.host;
+s.eVar40=document.location.host;
+s.prop16="MGN5";
+s.prop21="MGN2";
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<script language="JavaScript" type="text/javascript"><!--
+if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+//--></script><noscript><img src="http://trinitymirror.112.2o7.net/b/ss/tmrusvsthem,tmrmgnthreeaggprod/1/H.25.2--NS/0?[AQB]&cdp=3&[AQE]"
+height="1" width="1" border="0" alt="" /></noscript>
+
+</body>
+
+</html>
