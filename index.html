@@ -72,9 +72,9 @@ function loadQuestion() {
 function setThermometer() {
 
   if(score == 0) { getResults(); }
-  $('#grade-bar').animate({ width: (20 + score*20).toString() + '%' },1000);
+  $('#grade-bar').animate({ width: (score*20).toString() + '%' },1000);
   $('.grade').removeClass('yes');
-  $('.grade:eq(' + score + ')').addClass('yes');
+  $('.grade:eq(' + (score-1) + ')').addClass('yes');
 
 
 }
@@ -85,7 +85,7 @@ function answer(id) {
 
   if(id != currentQuestion.a) {
 
-    score++;
+    score--;
     setThermometer();
 
   } else {
@@ -99,7 +99,7 @@ function answer(id) {
 
 function getResults() {
 
-  $('#result').text($('.grade:eq(' + score + ')').text().toUpperCase());
+  $('#result').text($('.grade:eq(' + (score-1) + ')').text().toUpperCase());
   panel('results');
 
 }
@@ -183,7 +183,7 @@ footer, header, hgroup, menu, nav, section {
   #intro { display: block; }
   #thermo { position: absolute; bottom: 10%; height: 10%; left: 10%; right: 10%; background-color: #000; border: 4px solid #fff; border-radius: 1000px; text-align: center;  }
   #grades { position: absolute; display: table; table-layout: fixed; width: 100%; height: 100%; }
-  #grade-bar { display: block; width: 20%; height: 100%; position: absolute; background: #bcab01 url(bile.gif) left top; position: absolute; top: 0; left: 0; border-radius: 1000px; }
+  #grade-bar { display: block; width: 100%; height: 100%; position: absolute; background: #bcab01 url(bile.gif) left top; position: absolute; top: 0; left: 0; border-radius: 1000px; }
   .grade { display: table-cell; text-align: center; vertical-align: middle; color: #666; font-weight: bold; font-size: 3vw; font-size: 3vmin; }
   .yes { color: #fff; text-shadow: 1px 1px #000; }
 
@@ -307,7 +307,7 @@ button:active {
 
   <div id="grades">
 
-    <div class="grade yes">Not sure</div><div class="grade">Maybe?</div><div class="grade">Errr…</div><div class="grade">Not looking good</div><div class="grade">NOPE</div>
+    <div class="grade">NOPE</div><div class="grade">Maybe?</div><div class="grade">Errr…</div><div class="grade">Not sure</div><div class="grade yes">Recovering!</div>
 
   </div>
 
