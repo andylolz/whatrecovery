@@ -42,20 +42,8 @@ function startGame() {
   moveIn();
   questions = [
 
-  { a: 1, q: "How old are you?", o: ['Elders and betters', 'Lazy selfish millenial', 'Feral youth'], george: ['Great!', 'Uh oh...', 'Disgusting.'] },
-  { a: 0, q: "Are you heterosexual?" },
-  { a: 1, q: "Are you, or do you look a bit like you might&nbsp;be, Muslim?" },
-  { a: 0, q: "Do you have a job?" },
-  { a: 0, q: "Do you think it was all a lot better in the old&nbsp;days?" },
-  { a: 0, q: "Are you married?" },
-  { a: 0, q: "Were both your parents born in the&nbsp;UK?" },
-  { a: 0, q: "Michael Gove?" },
-  { a: 1, q: "Have you ever voted&nbsp;Labour?" },
-  { a: 1, q: "Have you had, or are you having, pre-marital&nbsp;sex?" },
-  { a: 1, q: "Do you think wind farms look&nbsp;nice?" },
-  { a: 1, q: "Have you ever worked for the&nbsp;BBC?" },
-  { a: 0, q: "God save the Queen?" }
-
+  { a: 0, q: "How old are you?", o: ['Elders and betters', 'Lazy selfish millenial', 'Feral youth'], george: ['Great!', 'Uh oh...', 'Disgusting.'] },
+  { a: 0, q: "Where do you live?", o: ['Westminster', 'Kensington / Chelsea', 'Other'], george: ['Great!', 'Even better!', 'Disgusting.'] },
   ];
   $('#qtotal').text(questions.length);
   qid = 0;
@@ -63,7 +51,6 @@ function startGame() {
   setThermometer();
   loadQuestion();
   panel('questions');
-
 }
 
 function loadQuestion() {
@@ -122,7 +109,7 @@ function tweet() {
 
   moveOut()
   var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
-  tweet_url += encodeURIComponent("The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " by the Daily Mail! How about you?");
+  tweet_url += encodeURIComponent("The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " economically recovered! How about you?");
   tweet_url += '&url=' + window.location.href;
 
   window.open(tweet_url,'_blank');
@@ -290,6 +277,11 @@ button:active {
     <p><span id="question-text">Are you, or do you look like a bit like you might be, Muslim?</span></p>
   </div>
 
+  <div id="question-number">Question <span id="qid">1</span> of <span id="qtotal">10</span></div>
+  <div id="question">
+    <p><span id="question-text">Question goes here.</span></p>
+  </div>
+
   <div class="buttons answer_buttons">
     <button id="go" class="three" onClick="answer(0)">One</button>
     <button id="go" class="three" onClick="answer(1)">Two</button>
@@ -303,7 +295,7 @@ button:active {
   <div id="result-box">
     The results are in! You are
     <span id="result">HATED</span>
-    by the Daily Mail!
+    economically recovered!
   </div>
 
     <div class="buttons">
