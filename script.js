@@ -141,7 +141,7 @@ function restartGame() {
 function loadQuestion() {
   panel('questions');
 
-  if(questions.length > 0 && score > 0) {
+  if(questions.length > 0) {
     qid++;
     currentQuestion = questions.shift();
     $('#question-text').html(currentQuestion.q);
@@ -163,9 +163,9 @@ function setThermometer() {
 
   $('#grade-bar').animate({ width: (score*20).toString() + '%' },1000);
   $('.grade').removeClass('yes');
-  $('.grade:eq(' + (score-1) + ')').addClass('yes');
-
-
+  if (score > 0) {
+    $('.grade:eq(' + (score-1) + ')').addClass('yes');
+  }
 }
 
 function setGeorge(success) {
