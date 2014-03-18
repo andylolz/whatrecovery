@@ -68,3 +68,8 @@ button.three { width: 33.3%; }
 @media screen and (max-width: 960px) {
   .box { left: 10%; width: 80%; }
 }
+
+body:after{
+    display:none;
+    content: url(i/happy1.png) url(i/happy2.png) url(i/happy3.png) url(i/sad1.png) url(i/sad2.png) url(i/sad3.png) url(i/sad4.png) url(i/sad5.png) url(i/sad6.png);
+}
