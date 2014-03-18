@@ -73,7 +73,7 @@ function startGame() {
       q: 'What’s your annual income?',
       a: [
         {
-          text: 'Roughly £1.2bn',
+          text: 'Roughly &nbsp;&nbsp;£1.2bn&nbsp;&nbsp;',
           feedback: 'Sounds like your finances will soon be bouncing back!<br><img src="i/green.jpg" /><br>Funnily enough, that’s what <a target="_blank" href="http://www.ukuncut.org.uk/targets/3">tax-avoiding topshop owner Sir Philip Green earned in 2005</a>.',
           score: 5
         }, {
