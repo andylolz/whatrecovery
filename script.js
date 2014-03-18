@@ -209,7 +209,7 @@ function tweet() {
 
   var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
 
-  tweet_url += encodeURIComponent("The results are in, and I'm " + $('#result').text().toLowerCase() + "! How's your economic recovery going?");
+  tweet_url += encodeURIComponent("How's your economic recovery going? I'm " + $('#result').text().toLowerCase());
   tweet_url += '&url=' + window.location.href;
 
   window.open(tweet_url,'_blank');
