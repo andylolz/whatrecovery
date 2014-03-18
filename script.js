@@ -172,7 +172,7 @@ function setGeorge(success) {
   if (success === true) {
     pic = 'happy' + (Math.floor(Math.random() * 3) + 1) + '.png';
   } else if(success === false) {
-    pic = 'sad' + (Math.floor(Math.random() * 5) + 1) + '.png';
+    pic = 'sad' + (Math.floor(Math.random() * 6) + 1) + '.png';
   } else {
     pic = 'briefcase.png';
   }
