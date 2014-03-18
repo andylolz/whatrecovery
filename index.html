@@ -10,377 +10,40 @@
 <meta name="viewport" content="width=960, user-scalable=false">
 <link rel="shortcut icon" href="http://images.icnetwork.co.uk/collections/usvsth3m/favicon.ico" />
 <script src="fastclick.js"></script>
-<script>
-
-var qid = 0;
-var questions = [];
-
-var currentQuestion;
-
-$(document).ready( function() {
-
-});
-
-window.addEventListener('load', function() {
-  FastClick.attach(document.body);
-}, false);
-
-
-function panel(p) {
-
-  $('.panel').hide();
-  $('#' + p).show();
-
-}
-
-
-
-function startGame() {
-
-  moveIn();
-  questions = [
-    {
-      q: 'How old are you?',
-      a: [
-        {
-          text: 'Under 25',
-          feedback: 'Ah. <a href="http://www.ons.gov.uk/ons/rel/lms/labour-market-statistics/november-2013/statistical-bulletin.html#tab-Young-people-in-the-labour-market">A fifth of under 25s</a> are sitting on their backsides and falling behind in the global race. Run faster, whelp!',
-          score: -0.3,
-        }, {
-          text: '25-40',
-          feedback: 'Great!',
-          score: 1,
-        }, {
-          text: '40-60',
-          feedback: 'Ok.',
-          score: 1,
-        }, {
-          text: '60+',
-          feedback: 'Hmm...',
-          score: 1,
-        },
-      ]
-    }, {
-      q: 'Where do you live?',
-      a: [
-        {
-          text: 'Highgate',
-          feedback: 'Excellent',
-          score: 1,
-        }, {
-          text: 'Hampstead',
-          feedback: 'Great!',
-          score: 1,
-        }, {
-          text: 'Chelsea',
-          feedback: 'Great!',
-          score: 1,
-        }, {
-          text: 'Westminster',
-          feedback: 'Great!',
-          score: 1,
-        }, {
-          text: 'Other',
-          feedback: 'Ah, a desolate northerner – there’s not much growth happening there. Why not brighten things up and move south?',
-          score: -0.3,
-        },
-      ]
-    }, {
-      q: 'What is your sex?',
-      a: [
-        {
-          text: 'Male',
-          feedback: 'Excellent',
-          score: 1,
-        }, {
-          text: 'Other',
-          feedback: 'Women <a href="http://www.google.com/url?q=http%3A%2F%2Fwww.theguardian.com%2Fbusiness%2F2013%2Fjul%2F01%2Fpublic-sector-austerity-measures-women&sa=D&sntz=1&usg=AFQjCNHfr-fsikXdfwPRLJ5fSkYxoSNsUQ">love their public sector non-jobs</a>. And in the new recovered economy, we won’t need those. Man up and get a real job!',
-          score: -0.3,
-        },
-      ]
-    }, {
-      q: 'How many houses do you own?',
-      a: [
-        {
-          text: '5+',
-          feedback: 'Excellent',
-          score: 1,
-        }, {
-          text: '1-4',
-          feedback: 'Mm ok..',
-          score: 1,
-        }, {
-          text: 'Less than 1',
-          feedback: 'You’re <em>renting?!</em> I didn’t know people still did that! Get yourself a house or two in London and everything will be fine.',
-          score: -0.3,
-        },
-      ]
-    }, {
-      q: 'Where did you go to school?',
-      a: [
-        {
-          text: 'Eton',
-          feedback: 'Excellent',
-          score: 1,
-        }, {
-          text: 'Harrow',
-          feedback: 'The other place eh.',
-          score: 1,
-        }, {
-          text: 'Other',
-          feedback: 'Never heard of it! You should choose more carefully next time.',
-          score: -0.3,
-        },
-      ]
-    }, {
-      q: 'What’s your annual income?',
-      a: [
-        {
-          text: '£1bn+',
-          feedback: 'Very well done!',
-          score: 1,
-        }, {
-          text: '£1m-1bn',
-          feedback: 'Good show.',
-          score: 1,
-        }, {
-          text: 'My wealth manager handles that',
-          feedback: '',
-          score: 1,
-        }, {
-          text: 'Other',
-          feedback: 'The market has spoken! Poverty is the world’s way of telling you to work harder.',
-          score: -0.3,
-        },
-      ]
-    },
-  ];
-  $('#qtotal').text(questions.length);
-  qid = 0;
-  score = 1;
-  setThermometer();
-  loadQuestion();
-  panel('questions');
-}
-
-function loadQuestion() {
-
-  if(questions.length > 0) {
-    qid++;
-    currentQuestion = questions.shift();
-    $('#question-text').html(currentQuestion.q);
-    var num_answers = currentQuestion.a.length;
-    $('.answer_buttons').html('');
-    $(currentQuestion.a).each(function(index, value) {
-      $('.answer_buttons').append('<button id="go" style="width: ' + (100/num_answers-2) + '%" onClick="answer(' + index + ')">' + value.text + '</button>');
-    });
-    $('#question-text').html(currentQuestion.q);
-    $('#qid').text(qid);
-
-  } else {
-    getResults();
-  }
-
-}
-
-function setThermometer() {
-
-  if(score == 0) { getResults(); }
-  $('#grade-bar').animate({ width: (score*20).toString() + '%' },1000);
-  $('.grade').removeClass('yes');
-  $('.grade:eq(' + (score-1) + ')').addClass('yes');
-
-
-}
-
-function answer(id) {
-  $('#feedback').html(currentQuestion.a[id].feedback).show();
-
-  score += currentQuestion.a[id].score;
-  setThermometer();
-
-  loadQuestion();
-
-}
-
-function getResults() {
-  $('#feedback').hide();
-  var result = $('.grade:eq(' + (score-1) + ')').text().toUpperCase() || 'SCREWED';
-  $('#result').text(result);
-  panel('results');
-
-}
-
-
-function tweet() {
-
-  moveOut()
-  var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
-  tweet_url += encodeURIComponent("The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " economically recovered! How about you?");
-  tweet_url += '&url=' + window.location.href;
-
-  window.open(tweet_url,'_blank');
-
-}
-
-function facebook() {
-
-  moveOut();
-  FB.ui({
-  method: 'feed',
-  link: window.location.href,
-  picture: 'http://toys.usvsth3m.com/are-you-hated-by-the-daily-mail/intro.jpg',
-  name: "How Much Are You Hated By The Daily Mail?",
-  description: "The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " by the Daily Mail! How about you?"
-  }, function(response){});
-
-}
-
-function moveOut() {
-
-$('#thermo').animate({left: '-90%', right: '110%'},1000);
-
-}
-
-function moveIn() {
-
-$('#george').animate({left: '10%'});
-$('#thermo').animate({left: '10%', right: '10%'},1000);
-
-}
-
-</script>
-<style>
-
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-  * { -webkit-font-size-adjust: none; }
-  html { height: 100%; width: 100%; background: #000 url(./bg.jpg) center center no-repeat; background-size: cover; background-attachment: fixed; }
-  body { font-family: 'Roboto Condensed'; font-size: 24px; font-size: 4vw; font-size: 4vmin; height: 100%; width: 100%; overflow: hidden; }
-  .panel { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none; }
-  #intro { display: block; }
-  #thermo { position: absolute; bottom: 10%; height: 10%; left: 10%; right: 10%; background-color: #000; border: 4px solid #fff; border-radius: 1000px; text-align: center;  }
-  #grades { position: absolute; display: table; table-layout: fixed; width: 100%; height: 100%; }
-  #grade-bar { display: block; width: 20%; height: 100%; position: absolute; background: #bcab01 url(bile.gif) left top; position: absolute; top: 0; left: 0; border-radius: 1000px; }
-  .grade { display: table-cell; text-align: center; vertical-align: middle; color: #666; font-weight: bold; font-size: 3vw; font-size: 3vmin; }
-  .yes { color: #fff; text-shadow: 1px 1px #000; }
-
-
-  h1 { font-size:60px; font-weight: bold; text-align: center; top: 10%; left: 10%; right: 10%; bottom: 50%; display: block; position: absolute; }
-  #george { width: 800px; height: 800px; float: right; background: url('osborne.png') no-repeat; background-size: 100%; }
-  .buttons { position: absolute; top: 55%; bottom: 30%; left: 10%; right: 10%; }
-  button { display: block; font-family: 'Roboto Condensed'; font-weight: bold; font-size: 3vw;  height: 100%; float: left; }
-
-button {
-  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
-  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
-  background-color:#ededed;
-  -webkit-border-top-left-radius:6px;
-  -moz-border-radius-topleft:6px;
-  border-top-left-radius:6px;
-  -webkit-border-top-right-radius:6px;
-  -moz-border-radius-topright:6px;
-  border-top-right-radius:6px;
-  -webkit-border-bottom-right-radius:6px;
-  -moz-border-radius-bottomright:6px;
-  border-bottom-right-radius:6px;
-  -webkit-border-bottom-left-radius:6px;
-  -moz-border-radius-bottomleft:6px;
-  border-bottom-left-radius:6px;
-  text-indent:0;
-  margin: 1%;
-  border:2px solid #dcdcdc;
-  display:inline-block;
-  color:#000000;
-  text-decoration:none;
-  text-align:center;
-  text-shadow:1px 1px 0px #ffffff;
-}
-button:hover {
-  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-  background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-  background-color:#dfdfdf;
-}
-button:active {
-  position:relative;
-  top:1px;
-}
-
-
-  /* this is an awful hack */
-  button.one { width: 98%; }
-  button.two { width: 48%; }
-  button.three { width: 31.3%; }
-
-  h1, #questions { color: #fff; text-shadow: 2px 2px #000; }
-  #question-number { position: absolute; text-align: center; top: 12%; width: 100%;  }
-  #feedback { background-color: white; border: 3px black solid; border-radius: 20px; padding: 20px; float: left; margin: 0 0 0 450px; display: none; }
-  #question { position: absolute; left: 15%; right: 15%; top:15%; bottom: 50%; text-align: center; font-size: 48px; font-size: 8vw; font-size: 8vmin; font-weight: bold; }
-  #question p { display: table; height: 100%; width: 100%; }
-  #question p span { display: table-cell; text-align: center; vertical-align: middle; }
-
-  #result-box { position: absolute; top: 10%; bottom: 50%; width: 100%; color: #fff; text-shadow: 1px 1px #000; text-align: center; font-weight: bold; }
-  #result { display: block; background-color: #fff; background-color: rgba(255,255,255,0.8); border-radius: 1000px; width: 80%; color: #ff7f00; text-shadow: 1px 1px #000; padding: 0.5% 0; margin: 0.5% auto; font-size: 13vh; border: 5px solid #000; }
-
-  #results button { font-weight: bold; font-size: 24px; font-size: 2.5vw; line-height: 3vw; font-weight: normal; }
-
-</style>
-
+<script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<link rel="stylesheet" href="http://usvsth3m.co.uk/wrapper/wrapper.css">
 
-<div class="panel" id="intro">
+<div id="george"></div>
 
-  <div id="george">
-    <div id="feedback"></div>
+<div class="panel show">
+
+  <div id="intro" class="box">
+    <div class="contents">
+      <h1>How&rsquo;s your economic recovery going?</h1>
+      <p>
+        George Osborne is feeling great about the nation’s finances!
+        But are you faring as well? Take our survey and find out!
+      </p>
+
+      <button id="go" onClick="startGame()">Start</button>
+    </div>
   </div>
+</div>
 
-  <h1>How&rsquo;s your recovery going?</h1>
+<div class="panel" id="feedback">
+  <div class="box">
+    <div class="contents">
+      <p></p>
 
-  <div class="buttons">
-    <button id="go" class="one" onClick="startGame()">Start</button>
+      <button id="go" onClick="loadQuestion()">Next question</button>
+    </div>
   </div>
-
 </div>
 
 <div class="panel" id="questions">
-
   <div id="question-number">Question <span id="qid">1</span> of <span id="qtotal">10</span></div>
   <div id="question">
     <p><span id="question-text">asdf</span></p>
@@ -398,7 +61,7 @@ button:active {
   </div>
 
     <div class="buttons">
-      <button id="go" class="three" onClick="startGame()">Try again</button><button id="go" class="three" onClick="tweet()">Tweet your result</button><button id="go" class="three" onClick="facebook()">Share on Facebook</button>
+      <button id="go" class="three" onClick="restartGame()">Try again</button><button id="go" class="three" onClick="tweet()">Tweet your result</button><button id="go" class="three" onClick="facebook()">Share on Facebook</button>
     </div>
   </div>
 
@@ -412,90 +75,13 @@ button:active {
 
   <div id="grades">
 
-    <div class="grade yes">Green shoots</div><div class="grade">Flourishing</div><div class="grade">Blooming</div><div class="grade">Booming!</div><div class="grade">Smashing it</div>
+    <div class="grade">Surviving</div><div class="grade">Struggling</div><div class="grade">Squeezed</div><div class="grade">Prospering</div><div class="grade">Jet setting!</div>
 
   </div>
 
 </div>
 
 <div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    // init the FB JS SDK
-    FB.init({
-      appId      : '383984258388383',                        // App ID from the app dashboard
-      channelUrl : '//toys.usvsth3m.com/channel.html', // Channel file for x-domain comms
-      status     : true,                                 // Check Facebook Login status
-      xfbml      : true                                  // Look for social plugins on the page
-    });
-
-    // Additional initialization code such as adding Event Listeners goes here
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script>
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-41079103-2']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-
-<script type='text/javascript'>
-    var _sf_async_config={};
-    /** CONFIGURATION START **/
-    _sf_async_config.uid = 33715;
-    _sf_async_config.domain = 'usvsth3m.tumblr.com';
-    _sf_async_config.useCanonical = true;
-    _sf_async_config.sections = 'Change this to your Section name';  //CHANGE THIS
-    _sf_async_config.authors = 'Change this to your Author name';    //CHANGE THIS
-    /** CONFIGURATION END **/
-    (function(){
-      function loadChartbeat() {
-        window._sf_endpt=(new Date()).getTime();
-        var e = document.createElement('script');
-        e.setAttribute('language', 'javascript');
-        e.setAttribute('type', 'text/javascript');
-        e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
-        document.body.appendChild(e);
-      }
-      var oldonload = window.onload;
-      window.onload = (typeof window.onload != 'function') ?
-      loadChartbeat : function() { oldonload(); loadChartbeat(); };
-    })();
-</script>
-
-<!-- SiteCatalyst Code -->
-<script type="text/JavaScript"><!--
-var s_account = "tmrusvsthem,tmrgroupaggregateprod";
-var s_omnitureDNSAlias = "trinitymirror.112.2o7.net";
-//--></script>
-<script language="JavaScript" type="text/javascript" src="http://s.mirror.co.uk/resources/js/s_code.js"></script>
-<script language="JavaScript" type="text/javascript"><!--
-s.pageName ="us vs th3m:"+document.title;
-s.prop5 ="us vs th3m";
-s.prop1=document.location.host;
-s.eVar40=document.location.host;
-s.prop16="MGN5";
-s.prop21="MGN2";
-var s_code=s.t();if(s_code)document.write(s_code)//--></script>
-<script language="JavaScript" type="text/javascript"><!--
-if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
-//--></script><noscript><img src="http://trinitymirror.112.2o7.net/b/ss/tmrusvsthem,tmrmgnthreeaggprod/1/H.25.2--NS/0?[AQB]&cdp=3&[AQE]"
-height="1" width="1" border="0" alt="" /></noscript>
 
 </body>
 

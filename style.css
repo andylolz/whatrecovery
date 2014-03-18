@@ -1,0 +1,70 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+* { -webkit-font-size-adjust: none; }
+html { height: 100%; width: 100%; background: #000 url(i/bg.jpg) center center no-repeat; background-size: cover; background-attachment: fixed; }
+body { font-family: 'Roboto Condensed'; font-size: 24px; font-size: 4vw; font-size: 4vmin; height: 100%; width: 100%; overflow: hidden; }
+.panel { width: 100%; height: 100%; position: absolute; top: 0; left: 0; display: none; }
+.show { display: block; }
+.box { display: table; position: absolute; left: 5%; top: 3%; vertical-align: middle; bottom: 30%; width: 60%; background-color: rgba(255,255,255,0.7); border-radius: 5%; }
+.contents { text-align: center; display: table-cell; height: 100%; width: 100%; vertical-align: middle; padding: 5%; }
+.contents button { margin-top: 5%; }
+.contents img { width: 50%; }
+#thermo { position: absolute; bottom: 2%; height: 10%; left: 10%; right: 10%; background-color: #000; border: 4px solid #fff; border-radius: 1000px; text-align: center;  }
+#grades { position: absolute; display: table; table-layout: fixed; width: 100%; height: 100%; }
+#grade-bar { display: block; width: 0%; height: 100%; position: absolute; background: #1E76BD; position: absolute; top: 0; left: 0; border-radius: 1000px; }
+.grade { display: table-cell; text-align: center; vertical-align: middle; color: #666; font-weight: bold; font-size: 3vw; font-size: 3vmin; }
+.yes { color: #fff; text-shadow: 1px 1px #000; }
+
+
+h1 { font-size:50px; font-weight: bold; }
+#george { width:100%; height: 100%; background: url(i/briefcase.png) right bottom no-repeat; background-size: auto 100%; position: absolute; }
+.buttons { position: absolute; top: 55%; bottom: 30%; left: 10%; right: 10%; }
+
+button { width: 100%; padding: 20px 0; font: 5vmin 'Roboto Condensed'; }
+
+button.three { width: 33.3%; }
+
+  h1, #questions { color: #fff; text-shadow: 2px 2px #000; }
+  #question-number { position: absolute; text-align: center; top: 12%; width: 100%;  }
+  /*#feedback { background-color: white; border: 3px black solid; border-radius: 20px; padding: 20px; float: left; margin: 0 0 0 450px; display: none; }*/
+  #question { position: absolute; left: 15%; right: 15%; top:15%; bottom: 50%; text-align: center; font-size: 48px; font-size: 8vw; font-size: 8vmin; font-weight: bold; }
+  #question p { display: table; height: 100%; width: 100%; }
+  #question p span { display: table-cell; text-align: center; vertical-align: middle; }
+
+  #result-box { position: absolute; top: 10%; bottom: 50%; width: 100%; color: #fff; text-shadow: 1px 1px #000; text-align: center; font-weight: bold; }
+  #result { display: block; background-color: #fff; background-color: rgba(255,255,255,0.8); border-radius: 1000px; width: 80%; color: #ff7f00; text-shadow: 1px 1px #000; padding: 0.5% 0; margin: 0.5% auto; font-size: 13vh; border: 5px solid #000; }
+
+  #results button { font-weight: bold; font-size: 24px; font-size: 2.5vw; line-height: 3vw; font-weight: normal; }
+
+@media screen and (max-width: 960px) {
+  .box { left: 10%; width: 80%; }
+}
