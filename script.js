@@ -83,7 +83,7 @@ function startGame() {
         }, {
           text: 'Close to £39,346',
           feedback: 'That’s the <a target="_blank" href="http://www.mirror.co.uk/news/uk-news/uk-average-salary-26500-figures-3002995">average salary of a police officer</a>.',
-          score: 1
+          score: -1
         }, {
           text: 'Closer to £26,500',
           feedback: 'Oh dear… Well you’re certainly not alone in <a target="_blank" href="http://www.mirror.co.uk/news/uk-news/uk-average-salary-26500-figures-3002995">earning close to the UK average wage</a>, if that’s any consolation.',
