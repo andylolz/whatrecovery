@@ -213,7 +213,7 @@ function tweet() {
 
   var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
 
-  tweet_url += encodeURIComponent("How's your economic recovery going? I'm " + $('#result').text().toLowerCase());
+  tweet_url += encodeURIComponent("How's your economic recovery going? According to @George_Osborne I'm " + $('#result').text().toLowerCase() + "! Find out how you're doing at:");
   tweet_url += '&url=' + window.location.href;
 
   window.open(tweet_url,'_blank');
@@ -225,9 +225,9 @@ function facebook() {
   FB.ui({
   method: 'feed',
   link: window.location.href,
-  picture: 'http://www.whatrecovery.co.uk/i/happy1.png',
+  picture: 'http://www.whatrecovery.co.uk/i/screenshot.jpg',
   name: "How's your economic recovery going?",
-  description: "How's your economic recovery going? I'm " + $('#result').text().toLowerCase()
+  description: "According to George Osborne I'm " + $('#result').text().toLowerCase() + "! Find out how you're doing at http://www.whatrecovery.co.uk/"
   }, function(response){});
 
 }
