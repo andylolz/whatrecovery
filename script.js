@@ -134,6 +134,7 @@ function startGame() {
 }
 
 function restartGame() {
+  $('#feedback button').text('Next question');
   setGeorge();
   startGame();
 }
@@ -185,6 +186,9 @@ function setGeorge(success) {
 
 function answer(id) {
   $('#feedback p').html(currentQuestion.a[id].feedback);
+  if (id == questions.length - 1) {
+    $('#feedback button').text('See your results');
+  }
   panel('feedback');
 
   points = currentQuestion.a[id].score;
