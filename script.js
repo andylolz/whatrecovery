@@ -65,7 +65,7 @@ function startGame() {
           score: 1
         }, {
           text: 'Anywhere else',
-          feedback: 'Oh dear… your house won’t be worth quite as much as in <a target="_blank" href="http://www.zoopla.co.uk/home-values/browse/london/sw3/chelsea-brompton/?q=SW3&search_source=home-values">Chelsea (average £4 million)</a> or <a target="_blank" href="http://www.zoopla.co.uk/home-values/london/whitehall/">Westminster (average £6.5 million)</a> then…',
+          feedback: 'Oh dear… your house won’t be worth quite as much as in <a target="_blank" href="http://www.zoopla.co.uk/home-values/browse/london/sw3/chelsea-brompton/?q=SW3&search_source=home-values">Chelsea (average £4 million)</a> or <a target="_blank" href="http://www.zoopla.co.uk/home-values/london/whitehall/">Westminster (average £6.5 million)</a>…',
           score: -1
         }
       ]
