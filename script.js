@@ -225,9 +225,9 @@ function facebook() {
   FB.ui({
   method: 'feed',
   link: window.location.href,
-  picture: 'http://toys.usvsth3m.com/are-you-hated-by-the-daily-mail/intro.jpg',
-  name: "How Much Are You Hated By The Daily Mail?",
-  description: "The results are in, and I'm " + $('.grade:eq(' + score + ')').text().toLowerCase() + " by the Daily Mail! How about you?"
+  picture: 'http://www.whatrecovery.co.uk/i/happy1.png',
+  name: "How's your economic recovery going?",
+  description: "How's your economic recovery going? I'm " + $('#result').text().toLowerCase()
   }, function(response){});
 
 }
