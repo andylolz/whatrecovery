@@ -232,7 +232,7 @@ function moveOut() {
 
 $('#george').animate({left: '-10%'});
 $('#thermo').animate({left: '-90%', right: '110%'},1000, function() {
-  $('#credits').animate({top: '90%'});
+  $('#credits').animate({top: '92%'});
 });
 
 }

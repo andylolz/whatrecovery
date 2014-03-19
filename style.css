@@ -70,7 +70,7 @@ button.three { width: 33.3%; }
 }
 
 #credits {
-  position: absolute; left: 2%; top: 100%;
+  position: absolute; left: 2%; top: 100%; font-size: 2vw; font-size: 2vmin;
 }
 
 body:after{
