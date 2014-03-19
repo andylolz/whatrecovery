@@ -209,8 +209,9 @@ function tweet() {
 
   var tweet_url = 'https://twitter.com/intent/tweet?related=usvsth3m&text=';
 
-  tweet_url += encodeURIComponent("How's your economic recovery going? According to @George_Osborne I'm " + $('#result').text().toLowerCase() + "! Find out how you're doing at:");
+  tweet_url += encodeURIComponent("How's your economic recovery going? Thanks to @George_Osborne I'm " + $('#result').text().toLowerCase() + "! See how you're doing at:");
   tweet_url += '&url=' + window.location.href;
+  tweet_url += '&hashtags=Budget2014';
 
   window.open(tweet_url,'_blank');
 
@@ -223,7 +224,7 @@ function facebook() {
   link: window.location.href,
   picture: 'http://www.whatrecovery.co.uk/i/screenshot.jpg',
   name: "How's your economic recovery going?",
-  description: "According to George Osborne I'm " + $('#result').text().toLowerCase() + "! Find out how you're doing at http://www.whatrecovery.co.uk/"
+  description: "Thanks to George Osborne I'm " + $('#result').text().toLowerCase() + "! Find out how you're doing at http://www.whatrecovery.co.uk/"
   }, function(response){});
 
 }
