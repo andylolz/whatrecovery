@@ -231,7 +231,9 @@ function facebook() {
 function moveOut() {
 
 $('#george').animate({left: '-10%'});
-$('#thermo').animate({left: '-90%', right: '110%'},1000);
+$('#thermo').animate({left: '-90%', right: '110%'},1000, function() {
+  $('#credits').animate({top: '90%'});
+});
 
 }
 
@@ -239,5 +241,6 @@ function moveIn() {
 
 $('#george').animate({left: '10%'});
 $('#thermo').animate({left: '10%', right: '10%'},1000);
+$('#credits').animate({top: '100%'});
 
 }
