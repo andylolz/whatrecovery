@@ -186,7 +186,7 @@ function setGeorge(success) {
 
 function answer(id) {
   $('#feedback p').html(currentQuestion.a[id].feedback);
-  if (id == questions.length - 1) {
+  if (questions.length === 0) {
     $('#feedback button').text('See your results');
   }
   panel('feedback');
