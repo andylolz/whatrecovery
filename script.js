@@ -91,7 +91,7 @@ function startGame() {
         }, {
           text: 'More like £13,124',
           feedback: 'Sorry to hear that. <a target="_blank" href="http://www.mirror.co.uk/news/uk-news/uk-average-salary-26500-figures-3002995">That’s the Minimum Wage as an annual salary.</a> That’s almost 100,000 times less than <a target="_blank" href="http://www.ukuncut.org.uk/targets/3">the £1.2 billion tax-avoiding Topshop owner Sir Philip Green earned in 2005</a>.<br><img src="i/green.jpg" />',
-          score: -2
+          score: -3
         }
       ]
     }, {
