@@ -198,7 +198,7 @@ function answer(id) {
 function getResults() {
   $('#feedback').hide();
   moveOut();
-  result = (score < 1) ? 'SCROUNGING' : $('.grade:eq(' + (score-1) + ')').text().toUpperCase();
+  result = (score < 1) ? 'SINKING' : $('.grade:eq(' + (score-1) + ')').text().toUpperCase();
   $('#result').text(result);
   panel('results');
 
